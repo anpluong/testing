@@ -47,7 +47,7 @@ const Main = () => {
   };
 
   // test 4
-  const submitHandler = (e) => {
+  const submi = (e) => {
     e.preventDefault();
 
     switch (radioOption) {
