@@ -3,7 +3,6 @@ import Main from "./Main";
 import App1 from "./App1";
 import App2 from "./App2";
 
-
 const App = () => {
   return (
     <div>

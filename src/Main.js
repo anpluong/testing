@@ -13,16 +13,12 @@ const Main = () => {
 
   // test1
   useEffect(() => {
-    const initial = path.substring(7, path.length - 1);
-    // axios
-    //   .get(`https://localhost:8000/v1/services/${initial}`)
-    //   .then((response) => {
-    //     setApp1(response.data.app1);
-    //     setApp2(response.data.app2);
-    //   });
-
-    setApp1(true);
-    setApp2(true);
+    axios
+      .get(`https://localhost:8000/v1/services`)
+      .then((response) => {
+        setApp1(response.data.app1);
+        setApp2(response.data.app2);
+      });
   });
 
   // test2
@@ -47,7 +43,7 @@ const Main = () => {
   };
 
   // test 4
-  const submi = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     switch (radioOption) {
@@ -77,7 +73,7 @@ const Main = () => {
               onChange={onOptionChange}
               checked={radioOption === "app1"}
             />
-            <label>App1</label>
+            <label htmlFor="app1">App1</label>
           </div>
         </section>
       )}
@@ -92,7 +88,7 @@ const Main = () => {
               onChange={onOptionChange}
               checked={radioOption === "app2"}
             />
-            <label>App2</label>
+            <label htmlFor="app2">App2</label>
           </div>
         </section>
       )}
