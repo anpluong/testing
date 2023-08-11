@@ -5,7 +5,7 @@ function Main() {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionChange = (event) => {
-    
+
     setSelectedOption(event.target.value);
   };
 

@@ -6,11 +6,13 @@ import Main from './Main';
 test('fetches data and sets it to state', () => {
   render(<Main />);
 
-  let radio1 = screen.getByTestId("op_1");
-  fireEvent.change(radio1)
+  let radio = screen.getByTestId("op_1");
+  fireEvent.click(radio)
+  expect(radio).toBeChecked();
 
   const pTag = screen.getByTestId("p-tag");
 
   expect(pTag).toHaveTextContent("op_1")
+
  
 });
