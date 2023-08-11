@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Main() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("no_op");
 
   const handleOptionChange = (event) => {
 
@@ -37,7 +37,7 @@ function Main() {
           <input
             type="radio"
             value="no_op"
-            data-testid="no-op"
+            data-testid="no_op"
             checked={selectedOption === "no_op"}
             onChange={handleOptionChange}
           />
