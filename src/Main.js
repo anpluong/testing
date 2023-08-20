@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from "react";
+import axiosRetry from "axios-retry";
 import axios from "axios";
 
 function Main() {
   const [selectedOption, setSelectedOption] = useState("no_op");
 
   const handleOptionChange = (event) => {
-
     setSelectedOption(event.target.value);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    
+    axiosRetry(axios, {
+      retries: 3, // number of retries
+      retryDelay: (retryCount) => {
+        console.log(`retry attempt: ${retryCount}`);
+        return retryCount * 2000; // time interval between retries
+      },
+      retryCondition: axiosRetry.isRetryableError
+    });
+    
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   };
 
   return (
@@ -44,6 +62,8 @@ function Main() {
         </label>
       </form>
       <p data-testid="p-tag">{selectedOption}</p>
+      <br />
+      <button onClick={submitHandler}>Submit</button>
     </div>
   );
 }
