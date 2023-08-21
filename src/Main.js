@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosRetry from "axios-retry";
-import axios from "axios";
+import { makeHTTPCall } from "./util";
 
 function Main() {
   const [selectedOption, setSelectedOption] = useState("no_op");
@@ -9,22 +8,12 @@ function Main() {
     setSelectedOption(event.target.value);
   };
 
+  // const MAX_RETRIES = 3;
+  // const RETRY_DELAY = 1000; // 1 second
+
   const submitHandler = (e) => {
     e.preventDefault();
-
-    
-    axiosRetry(axios, {
-      retries: 3, // number of retries
-      retryDelay: (retryCount) => {
-        console.log(`retry attempt: ${retryCount}`);
-        return retryCount * 2000; // time interval between retries
-      },
-      retryCondition: axiosRetry.isRetryableError
-    });
-    
-    axios.get('https://jsonplaceholder.typicode.com/users')
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+    makeHTTPCall("get", "https://jsonplaceholder.typicode.com/users");
   };
 
   return (
