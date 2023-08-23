@@ -12,26 +12,6 @@ axiosRetry(axios, {
   },
 });
 
-export const makeHTTPCall = async (method, url) => {
-  await axios({
-    method,
-    url,
-  }).then(result => {
-    console.log(result)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-};
-
-
-// export const makeHTTPCall = (method, url) => {
-//     axios
-//       .get(url)
-//       .then((result) => {
-//         console.log(result);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
+export const handleHttpRequest = async(config) => {
+    return await axios(config)
+}

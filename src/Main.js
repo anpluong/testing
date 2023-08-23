@@ -1,20 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { makeHTTPCall } from "./util";
+import axios from "axios";
+import { handleHttpRequest } from "./util";
 
 function Main() {
   const [selectedOption, setSelectedOption] = useState("no_op");
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const config = {
+      method: "get",
+      url: "https://jsonplaceholder.typicode.com/users",
+    };
+
+    handleHttpRequest(config).then((response) => {
+      setUsers(response.data);
+    });
+  }, []);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
-  // const MAX_RETRIES = 3;
-  // const RETRY_DELAY = 1000; // 1 second
-
   const submitHandler = (e) => {
-    e.preventDefault();
-    makeHTTPCall("get", "https://jsonplaceholder.typicode.com/users");
+    // e.preventDefault();
+    // handleHttpRequest("get", "https://jsonplaceholder.typicode.com/users");
   };
+
+  let userNames = null;
+
+  if (users.length > 0) {
+    userNames = (
+      <ul>
+        {users.map((user) => {
+          return <li>{user.username}</li>;
+        })}
+      </ul>
+    );
+  }
 
   return (
     <div>
@@ -53,6 +75,7 @@ function Main() {
       <p data-testid="p-tag">{selectedOption}</p>
       <br />
       <button onClick={submitHandler}>Submit</button>
+      {userNames}
     </div>
   );
 }
