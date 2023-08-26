@@ -1,84 +1,30 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { handleHttpRequest } from "./util";
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import { handleHttpRequest } from "./util";
 
-function Main() {
-  const [selectedOption, setSelectedOption] = useState("no_op");
-  const [users, setUsers] = useState([]);
+// function Main() {
 
-  useEffect(() => {
-    const config = {
-      method: "get",
-      url: "https://jsonplaceholder.typicode.com/users",
-    };
+//   const displayText = () => {
+//     return function1()
+//   };
 
-    handleHttpRequest(config).then((response) => {
-      setUsers(response.data);
-    });
-  }, []);
+//   const function1 = () => {
+//     return "abc"
+//   }
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+//   const submitHandler = (e) => {
+//     function1()
+//     // e.preventDefault();
+//     // handleHttpRequest("get", "https://jsonplaceholder.typicode.com/users");
+//   };
 
-  const submitHandler = (e) => {
-    // e.preventDefault();
-    // handleHttpRequest("get", "https://jsonplaceholder.typicode.com/users");
-  };
-
-  let userNames = null;
-
-  if (users.length > 0) {
-    userNames = (
-      <ul>
-        {users.map((user) => {
-          return <li>{user.username}</li>;
-        })}
-      </ul>
-    );
-  }
-
-  return (
-    <div>
-      <form>
-        <label>
-          Option 1
-          <input
-            type="radio"
-            value="op_1"
-            data-testid="op_1"
-            checked={selectedOption === "op_1"}
-            onChange={handleOptionChange}
-          />
-        </label>
-        <label>
-          Option 2
-          <input
-            type="radio"
-            value="op_2"
-            data-testid="op_2"
-            checked={selectedOption === "op_2"}
-            onChange={handleOptionChange}
-          />
-        </label>
-        <label>
-          Option 3
-          <input
-            type="radio"
-            value="no_op"
-            data-testid="no_op"
-            checked={selectedOption === "no_op"}
-            onChange={handleOptionChange}
-          />
-        </label>
-      </form>
-      <p data-testid="p-tag">{selectedOption}</p>
-      <br />
-      <button onClick={submitHandler}>Submit</button>
-      {userNames}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <p data-testid="p-tag">{displayText()}</p>
+//       <button onClick={submitHandler}>Submit</button>
+//     </div>
+//   );
+// }
 
 // import React from "react";
 // import { useState, useEffect } from "react";
@@ -184,4 +130,4 @@ function Main() {
 //   );
 // };
 
-export default Main;
+// export default Main;
